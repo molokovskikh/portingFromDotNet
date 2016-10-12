@@ -5,6 +5,30 @@ package ConsoleApp;
  */
 public class Data implements DataExtension {
 
+
+
+    /* Source on .NET
+     public struct Data
+    {
+        public int Number1
+        {
+            get;
+            set;
+        }
+
+        public int Number2
+        {
+            get;
+            set;
+        }
+
+        public override string ToString()
+        {
+            return "Number1: " + this.Number1 + " Number2: " + this.Number2;
+        }
+    }
+     */
+
     private static final int OFFSET_NUMBER1 = 0;
     private static final int OFFSET_NUMBER2 = 4;
 
@@ -33,11 +57,11 @@ public class Data implements DataExtension {
     }
 
     public void setNumber1(int number) {
-       setNumber(number, OFFSET_NUMBER1);
+        setNumber(number, OFFSET_NUMBER1);
     }
 
     public int getNumber1() {
-      return getNumber(OFFSET_NUMBER1);
+        return getNumber(OFFSET_NUMBER1);
     }
 
     public void setNumber2(int number) {
@@ -60,26 +84,4 @@ public class Data implements DataExtension {
         int sum = data1.getNumber1() * data1.getNumber2() + dataNumber1;
         return sum;
     }
-
-    /* Source on .NET
-     public struct Data
-    {
-        public int Number1
-        {
-            get;
-            set;
-        }
-
-        public int Number2
-        {
-            get;
-            set;
-        }
-
-        public override string ToString()
-        {
-            return "Number1: " + this.Number1 + " Number2: " + this.Number2;
-        }
-    }
-     */
 }

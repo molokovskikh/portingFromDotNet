@@ -11,6 +11,63 @@ import java.lang.reflect.Field;
  */
 public class Class2 {
 
+
+/*  Source on .NET
+
+    public delegate void DataHandler(byte result);
+
+    public event DataHandler DataGetter;
+
+    public void ExecuteDataGetter()
+    {
+        if (this.DataGetter != null)
+        {
+            byte result = this.Process();
+            this.DataGetter.Invoke(result);
+        }
+    }
+
+    private unsafe byte Process()
+    {
+        byte val = 0;
+        Class1 class1 = new Class1();
+        var d = class1.GetData(10);
+        for (int i = 0; i < 6; i++)
+        {
+            d[i].Number1 = i * 10;
+            d[i].Number2 = -(i % 3) - 1;
+        }
+
+        int size = Marshal.SizeOf(typeof(int)) * 5;
+        IntPtr r = Marshal.AllocHGlobal(size);
+        try
+        {
+                int* p = (int*)r.ToPointer();
+            for (int i = 0; i < 10; i += 2)
+            {
+                int sum = d[i].Summarize(d[i + 1]);
+                Assert.IsTrue(d[i + 1].Number1 >= 0);
+                    *p = sum;
+                p++;
+            }
+
+                byte* b = (byte*)r.ToPointer();
+            for (int i = 0; i < size; i++)
+            {
+                val ^= *b;
+                b++;
+            }
+        }
+        finally
+        {
+            Marshal.FreeHGlobal(r);
+        }
+
+        return val;
+    }
+  */
+
+
     private DataHandler dataGetter;
 
     public DataHandler getDataGetter() {
@@ -72,65 +129,13 @@ public class Class2 {
                 b++;
             }
         }
-        catch(Exception e) {
+        finally {
             unsafe.freeMemory(r);
         }
 
-        return val;
-    }
 
-/*  Source on .NET
-
-    public delegate void DataHandler(byte result);
-
-    public event DataHandler DataGetter;
-
-    public void ExecuteDataGetter()
-    {
-        if (this.DataGetter != null)
-        {
-            byte result = this.Process();
-            this.DataGetter.Invoke(result);
-        }
-    }
-
-    private unsafe byte Process()
-    {
-        byte val = 0;
-        Class1 class1 = new Class1();
-        var d = class1.GetData(10);
-        for (int i = 0; i < 6; i++)
-        {
-            d[i].Number1 = i * 10;
-            d[i].Number2 = -(i % 3) - 1;
-        }
-
-        int size = Marshal.SizeOf(typeof(int)) * 5;
-        IntPtr r = Marshal.AllocHGlobal(size);
-        try
-        {
-                int* p = (int*)r.ToPointer();
-            for (int i = 0; i < 10; i += 2)
-            {
-                int sum = d[i].Summarize(d[i + 1]);
-                Assert.IsTrue(d[i + 1].Number1 >= 0);
-                    *p = sum;
-                p++;
-            }
-
-                byte* b = (byte*)r.ToPointer();
-            for (int i = 0; i < size; i++)
-            {
-                val ^= *b;
-                b++;
-            }
-        }
-        finally
-        {
-            Marshal.FreeHGlobal(r);
-        }
 
         return val;
     }
-  */
+
 }

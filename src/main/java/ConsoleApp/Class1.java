@@ -5,6 +5,14 @@ package ConsoleApp;
  */
 public class Class1 {
 
+    /*
+   Source in .NET
+       public Data[] GetData(int count)
+       {
+           return new Data[count];
+       }
+    */
+
     public Data[] getData(int count) {
 
         Data[] result = new Data[count];
@@ -13,11 +21,5 @@ public class Class1 {
         }
         return result;
     }
-    /*
-    Source in .NET
-        public Data[] GetData(int count)
-        {
-            return new Data[count];
-        }
-     */
+
 }
